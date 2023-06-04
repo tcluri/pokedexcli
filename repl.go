@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 	"strings"
 )
@@ -13,7 +14,15 @@ func startRepl(cfg *config) {
 	for {
 		fmt.Print(" >")
 
-		scanner.Scan()
+		if !scanner.Scan() {
+			if scanner.Err() == io.EOF {
+				fmt.Println("End of input...try with a valid input")
+				return
+			}
+			fmt.Println("Exiting the program...")
+			return
+		}
+
 		text := scanner.Text()
 
 		cleaned := cleanInput(text)

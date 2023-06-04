@@ -14,7 +14,7 @@ func (c *Client) GetPokemon(pokemonName string) (Pokemon, error) {
 	dat, ok := c.cache.Get(fullURL)
 	if ok {
 		// print if cache exists
-		fmt.Println("cache hit!")
+		// fmt.Println("cache hit!")
 		pokemon := Pokemon{}
 		err := json.Unmarshal(dat, &pokemon)
 		if err != nil {
@@ -23,7 +23,7 @@ func (c *Client) GetPokemon(pokemonName string) (Pokemon, error) {
 		return pokemon, nil
 	}
 	// print if cache misses
-	fmt.Println("cache miss!")
+	// fmt.Println("cache miss!")
 
 	req, err := http.NewRequest("GET", fullURL, nil)
 	if err != nil {
